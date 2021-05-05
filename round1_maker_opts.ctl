@@ -19,7 +19,7 @@ est_gff= #aligned ESTs or mRNA-seq from an external GFF3 file
 altest_gff= #aligned ESTs from a closly relate species in GFF3 format
 
 #-----Protein Homology Evidence (for best results provide a file for at least one)
-protein=muteswan.faa, /30days/uqakaraw/02.MAKER/ref_proteins/ZJU1.0.faa
+protein=muteswan.faa, /30days/uqakaraw/02.MAKER/ref_proteins/ZJU1.0.faa, /30days/uqakaraw/02.MAKER/ref_proteins/bs_ncbi.faa
 protein_gff=  #aligned protein homology evidence from an external GFF3 file
 
 #-----Repeat Masking (leave values blank to skip repeat masking)
