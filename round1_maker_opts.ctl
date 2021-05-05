@@ -1,4 +1,3 @@
-##This script below is the one used for the first round of maker3 for mute swan
 #-----Genome (these are always required)
 genome=muteswan.fasta #genome sequence (fasta file or fasta embeded in GFF3 file)
 organism_type=eukaryotic #eukaryotic or prokaryotic. Default is eukaryotic
@@ -72,4 +71,4 @@ correct_est_fusion=0 #limits use of ESTs in annotation to avoid fusion genes
 tries=2 #number of times to try a contig if there is a failure for some reason
 clean_try=0 #remove all data from previous run before retrying, 1 = yes, 0 = no
 clean_up=0 #removes theVoid directory with individual analysis files, 1 = yes, 0 = no
-TMP= #specify a directory other than the system default temporary directory for temporary files
+TMP=${TMPDIR} #specify a directory other than the system default temporary directory for temporary files
