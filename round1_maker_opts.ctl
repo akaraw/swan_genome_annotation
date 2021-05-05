@@ -15,18 +15,18 @@ other_pass=0 #passthrough anyything else in maker_gff: 1 = yes, 0 = no
 
 #-----EST Evidence (for best results provide a file for at least one)
 est=MS_ISOseq_TAMA.fasta, muteswan.fna #set of ESTs or assembled mRNA-seq in fasta format
-altest= #EST/cDNA sequence file in fasta format from an alternate organism
+altest=/30days/uqakaraw/02.MAKER/ref_proteins/ZJU1.0.fna #EST/cDNA sequence file in fasta format from an alternate organism
 est_gff= #aligned ESTs or mRNA-seq from an external GFF3 file
 altest_gff= #aligned ESTs from a closly relate species in GFF3 format
 
 #-----Protein Homology Evidence (for best results provide a file for at least one)
-protein=muteswan.faa
+protein=muteswan.faa, /30days/uqakaraw/02.MAKER/ref_proteins/ZJU1.0.faa
 protein_gff=  #aligned protein homology evidence from an external GFF3 file
 
 #-----Repeat Masking (leave values blank to skip repeat masking)
 model_org=simple #select a model organism for RepBase masking in RepeatMasker
 rmlib=repeat_lib_muteswan/cygOlo1.repeat.fasta #provide an organism specific repeat library in fasta format for RepeatMasker
-repeat_protein=maker/data/te_proteins.fasta #provide a fasta file of transposable element proteins for RepeatRunner
+repeat_protein=/30days/uqakaraw/02.MAKER/ref_proteins/te_proteins.fasta #provide a fasta file of transposable element proteins for RepeatRunner
 rm_gff= #pre-identified repeat elements from an external GFF3 file
 prok_rm=0 #forces MAKER to repeatmask prokaryotes (no reason to change this), 1 = yes, 0 = no
 softmask=1 #use soft-masking rather than hard-masking in BLAST (i.e. seg and dust filtering)
