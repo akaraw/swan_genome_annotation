@@ -10,3 +10,6 @@ Full repeat annotation will be in the future publication
 
 ZJU1.0 - Pekin duck genome - link:https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/015/476/345/GCF_015476345.1_ZJU1.0/
 
+_other_configuration_
+
+Please use LIBDIR variable export to make the RepeatMasker/Libraries in the maker share folder avialable
