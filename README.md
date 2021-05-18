@@ -12,4 +12,4 @@ ZJU1.0 - Pekin duck genome - link:https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/0
 
 _other_configuration_
 
-Please use LIBDIR variable export to make the RepeatMasker/Libraries in the maker share folder avialable
+Please use LIBDIR variable export to make the RepeatMasker/Libraries, which is avialble in the maker share folder
