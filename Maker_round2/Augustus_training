@@ -22,3 +22,49 @@ augustus --species=human ${gen}.chr1.fa --softmasking=on \                      
 
 #RNAseq support check:
 cat aug.${gen}.hints.gff | perl -ne 'if (/\ttranscript\t.*\t(\S+)/){$tx=$1;} if (/transcript supported.*100/) {print "$tx\n";}' | tee supported.lst | wc -l
+
+#Then create a set of genes for training augustus from the prediction above:
+gff2gbSmallDNA.pl --good=supported.lst aug.${gen}.hints.gff ${gen}.chr1.fa 5000 genes.gb
+
+#check the count of new genes
+grep -c LOCUS genes.gb #5904
+
+#removing redundancy, converting aa sequences
+gtf2aa.pl ms.chr1.fa aug.${gen}.hints.gff prot.aa
+
+#Perform all vs all blast:
+aa2nonred.pl --maxid=0.8 --diamond --cores=22 prot.aa prot.nr.aa
+
+#create nr list:
+grep ">" prot.nr.aa | perl -pe "s/>//" > nonred.lst
+
+#filter our non-redundant genes
+cat genes.gb | perl -ne '
+if ($_ =~ m/LOCUS\s+(\S+)\s/) {
+$txLocus = $1;
+} elsif ($_ =~ m/\/gene=\"(\S+)\"/) {
+$txInGb3{$1} = $txLocus
+}
+if(eof()) {
+foreach (keys %txInGb3) {
+print "$_\t$txInGb3{$_}\n";
+}
+}' > loci.lst
+
+grep -f nonred.lst loci.lst | cut -f2 > nonred.loci.lst
+
+filterGenesIn.pl nonred.loci.lst genes.gb > genes.f.gb
+mv genes.f.gb genes.gb
+#Create a new species
+new_species.pl --species=${gen}
+
+#1000 genes as models is enoguh for training, if you get more than that, it will slow the process. Therefore only select 1000 random genes for training as follows:
+randomSplit.pl genes.gb 1000
+mv genes.gb.test bonafide.gb
+
+#Then start training augustus
+
+
+
+
+
