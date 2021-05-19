@@ -8,4 +8,5 @@ awk '{ if ($2 == "est2genome") print $0 }' ${gen}_rnd1.all.maker.noseq.gff > ${g
 # protein alignments
 awk '{ if ($2 == "protein2genome") print $0 }' ${gen}_rnd1.all.maker.noseq.gff > ${gen}_rnd1.all.maker.protein2genome.gff
 # repeat alignments
-awk '{ if ($2 ~ "repeat") print $0 }' ${gen}_rnd1.all.maker.noseq.gff > ${gen}_rnd1.all.maker.repeats.gff
+awk '{ if ($2 ~ "repeat") print $0 }' ${gen}_rnd1.all.maker.noseq.gff | tee ${gen}_rnd1.all.maker.repeats.gff | head
+cd ..
