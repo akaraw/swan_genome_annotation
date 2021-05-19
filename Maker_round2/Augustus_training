@@ -1,0 +1,24 @@
+#Conda environment - bioconda maker3
+#Extract the chr1 (as this is the largest chromosome) from the genome using seqkit grep
+#gen=ms or bs
+#Then align the TAMA merge transcripts back to the chr1 using:
+minimap2 -t 20 -ax splice -uf --secondary=no --splice-flank=no -C5 -O6,24 -B4 ${gen}.chr1.fa ../../01.Mute_swan_annotation_ISOseq/final.bed | samtools view -bS - | samtools sort -o ms.chr1.transcritp.sorted.bam -
+
+#Then extract intron hints for the augustus training:
+bam2hints --intronsonly --in=${gen}.chr1.transcritp.sorted.bam --out=hints.intron.gff
+
+#Then extract exon structures with the following command:
+bam2wig ${gen}.chr1.transcritp.sorted.bam | wig2hints.pl --width=10 --margin=10 --minthresh=2 --minscore=4 --prune=0.1 --src=W --type=ep \ 
+--radius=4.5 --pri=4 --strand="." > hints.ep.gff
+
+#then concatenate all the hits into one file:
+cat hints.ep.gff hints.intron.gff > hints.gff
+
+#Next suing the hints, we run augustus prediction as follows:
+augustus --species=human ${gen}.chr1.fa --softmasking=on \                                     #--predictionStart=$((i*2000000)) --predictionEnd=$(((i+1)*2000000+50000)) \
+--hintsfile=hints.gff --extrinsicCfgFile=extrinsic.M.RM.E.W.cfg  > aug.${gen}.hints.$i.gff &
+
+#cat aug.${gen}.hints.{0..3}.gff | join_aug_pred.pl > aug.${gen}.hints.gff
+
+#RNAseq support check:
+cat aug.${gen}.hints.gff | perl -ne 'if (/\ttranscript\t.*\t(\S+)/){$tx=$1;} if (/transcript supported.*100/) {print "$tx\n";}' | tee supported.lst | wc -l
