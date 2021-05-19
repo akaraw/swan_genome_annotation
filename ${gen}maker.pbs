@@ -1,0 +1,14 @@
+#!/bin/bash
+#PBS -l select=1:ncpus=24:mem=120GB
+#PBS -l walltime=336:00:00
+#PBS -A ${account_name}
+#PBS -N maker
+
+source activate maker
+cd $PBS_O_WORKDIR
+gen=ms #or bs
+rnd=1 #2 or 3
+outdir=round${rnd}_${gen}
+
+export LIBDIR=/path/to/miniconda3/envs/maker/share/RepeatMasker/Libraries/
+mpiexec -n 22 maker -base ${outdir} maker_opts.ctl
