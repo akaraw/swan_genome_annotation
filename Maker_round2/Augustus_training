@@ -1,6 +1,11 @@
 #Conda environment - bioconda maker3
+#Preperation
 #Extract the chr1 (as this is the largest chromosome) from the genome using seqkit grep
-#gen=ms or bs
+chrname="chr1"
+fa=muteswan.fa
+seqkit grep -p $chrname $fa > ${gen}.chr1.fa
+gen=ms #or bs
+
 #Then align the TAMA merge transcripts back to the chr1 using:
 minimap2 -t 20 -ax splice -uf --secondary=no --splice-flank=no -C5 -O6,24 -B4 ${gen}.chr1.fa ../../01.Mute_swan_annotation_ISOseq/final.bed | samtools view -bS - | samtools sort -o ms.chr1.transcritp.sorted.bam -
 
@@ -59,12 +64,20 @@ mv genes.f.gb genes.gb
 new_species.pl --species=${gen}
 
 #1000 genes as models is enoguh for training, if you get more than that, it will slow the process. Therefore only select 1000 random genes for training as follows:
-randomSplit.pl genes.gb 1000
-mv genes.gb.test bonafide.gb
+#randomSplit.pl genes.gb 1000
+#mv genes.gb.test bonafide.gb
 
 #Then start training augustus
+etraining --species=bug genes.gb
 
+#test
+augustus --species=${gen} genes.gb.test | tee firsttest.out
+grep -A 22 Evaluation firsttest.out
 
+#Then optimize augustus
+optimize_augustus.pl --species=${gen} genes.gb.train
+etraining --species=${gen} genes.gb.train
 
-
-
+#check the prediction accuracy
+augustus --species=${gen} genes.test.gb | tee secondtest.out
+grep -A 22 Evaluation secondtest.out
