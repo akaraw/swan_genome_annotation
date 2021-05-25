@@ -79,5 +79,5 @@ optimize_augustus.pl --species=${gen} genes.gb.train
 etraining --species=${gen} genes.gb.train
 
 #check the prediction accuracy
-augustus --species=${gen} genes.test.gb | tee secondtest.out
+augustus --species=${gen} genes.gb.test | tee secondtest.out
 grep -A 22 Evaluation secondtest.out
