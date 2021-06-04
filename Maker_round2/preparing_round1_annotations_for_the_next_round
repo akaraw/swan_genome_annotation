@@ -1,12 +1,14 @@
 #Round1 output directory
 gen=ms #or bs
-cd round1_${gen}.maker.output
-gff3_merge -s -d round1_${gen}_master_datastore_index.log > ${gen}_rnd1.all.maker.gff
-gff3_merge -n -s -d round1_${gen}_master_datastore_index.log > ${gen}_rnd1.all.maker.noseq.gff
+rnd=rnd2
+dir=round2
+cd ${dir}_${gen}.maker.output
+gff3_merge -s -d ${dir}_${gen}_master_datastore_index.log > ${gen}_${rnd}.all.maker.gff
+gff3_merge -n -s -d ${dir}_${gen}_master_datastore_index.log > ${gen}_${rnd}.all.maker.noseq.gff
 # transcript alignments
-awk '{ if ($2 == "est2genome") print $0 }' ${gen}_rnd1.all.maker.noseq.gff > ${gen}_rnd1.all.maker.est2genome.gff
+awk '{ if ($2 == "est2genome") print $0 }' ${gen}_${rnd}.all.maker.noseq.gff > ${gen}_${rnd}.all.maker.est2genome.gff
 # protein alignments
-awk '{ if ($2 == "protein2genome") print $0 }' ${gen}_rnd1.all.maker.noseq.gff > ${gen}_rnd1.all.maker.protein2genome.gff
+awk '{ if ($2 == "protein2genome") print $0 }' ${gen}_${rnd}.all.maker.noseq.gff > ${gen}_${rnd}.all.maker.protein2genome.gff
 # repeat alignments
-awk '{ if ($2 ~ "repeat") print $0 }' ${gen}_rnd1.all.maker.noseq.gff | tee ${gen}_rnd1.all.maker.repeats.gff | head
+awk '{ if ($2 ~ "repeat") print $0 }' ${gen}_${rnd}.all.maker.noseq.gff | tee ${gen}_${rnd}.all.maker.repeats.gff | head
 cd ..
