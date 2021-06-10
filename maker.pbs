@@ -11,4 +11,5 @@ rnd=1 #2 or 3
 outdir=round${rnd}_${gen}
 
 export LIBDIR=/path/to/miniconda3/envs/maker/share/RepeatMasker/Libraries/
+module load openMPI
 mpiexec -n 22 maker -base ${outdir} maker_opts.ctl
