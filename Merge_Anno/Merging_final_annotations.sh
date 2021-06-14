@@ -17,6 +17,10 @@ else
 echo "uniprot is already downloaded"
 fi
 
+#Tag premature stop codons
+agat_sp_flag_premature_stop_codons.pl --gff ${gen}_final.gff --fasta ${gen}.fa --out ${gen}.prematuretagged.gff
+mv ${gen}.prematuretagged.gff ${gen}_final.gff
+
 #Uniprot matches
 blastp -evalue 0.000001 -db blastp/uniprot_sprot.fasta -num_alignments 1 -num_threads 24 -outfmt 6 -max_hsps 1 -out blastp/${gen}.nr.uniprot.txt -query ${gen}.nr.aa
 
