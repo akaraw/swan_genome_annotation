@@ -7,5 +7,14 @@ mmseqs cluster --cov-mode 1 -c 0.9 --min-seq-id 0.9 proteins_mmseqs cluster $PWD
 mmseqs result2flat proteins_mmseqs proteins_mmseqs cluster cluster_out --use-fasta-header
 grep "^>" cluster_out | sed 's/>//g' | seqtk subseq orthos.aa - | seqkit seq -m 10 > uniq_90_proteins.fasta
 mkdir proteins && mv orthos.aa uniq_90_proteins.fasta proteins
+
 ##predict now
-prothint.py --threads 64 scaffolds.fasta uniq_90_proteins.fasta
+#Installing GeneMark
+#http://exon.gatech.edu/GeneMark/
+#Install perl modules
+mamba create -n evm -c bioconda diamond evidencemodeller splan 
+export PATH=/30days/uqakaraw/blackswan_final_anno/evm/gmes_linux_64/:$PATH
+export PATH=/30days/uqakaraw/blackswan_final_anno/evm/gmes_linux_64/ProtHint/bin:$PATH
+ mamba  install -c bioconda perl-yaml perl-math-utils perl-mce perl-parallel-forkmanager perl-hash-merge 
+
+prothint.py --threads 24 bs.fasta uniq_90_proteins.fasta
