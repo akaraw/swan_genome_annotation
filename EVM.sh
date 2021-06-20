@@ -15,6 +15,7 @@ mkdir proteins && mv orthos.aa uniq_90_proteins.fasta proteins
 mamba create -n evm -c bioconda diamond evidencemodeller splan 
 export PATH=/30days/uqakaraw/blackswan_final_anno/evm/gmes_linux_64/:$PATH
 export PATH=/30days/uqakaraw/blackswan_final_anno/evm/gmes_linux_64/ProtHint/bin:$PATH
- mamba  install -c bioconda perl-yaml perl-math-utils perl-mce perl-parallel-forkmanager perl-hash-merge 
+mamba  install -c bioconda perl-yaml perl-math-utils perl-mce perl-parallel-forkmanager perl-hash-merge 
+mamba install -c bioconda pasa
 
-prothint.py --threads 24 bs.fasta uniq_90_proteins.fasta
+
