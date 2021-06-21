@@ -18,4 +18,8 @@ export PATH=/30days/uqakaraw/blackswan_final_anno/evm/gmes_linux_64/ProtHint/bin
 mamba  install -c bioconda perl-yaml perl-math-utils perl-mce perl-parallel-forkmanager perl-hash-merge 
 mamba install -c bioconda pasa
 
+/90days/uqakaraw/miniconda3/envs/pasa/opt/pasa-2.4.1/Launch_PASA_pipeline.pl \
+--CPU 16 -C -R --ALIGNER gmap,blat -g bs.fa -t bs_transcripts.fa -c alignAssembly.conf -u bs_transcripts.fa
 
+/90days/uqakaraw/miniconda3/envs/evm/opt/evidencemodeler-1.1.1/EvmUtils/create_weights_file.pl -T \
+evm/pasa/annot.sqlite3.pasa_assemblies.gff3 -P public.gff -A rnd_1_2_3_merged.gff > weights.txt
