@@ -30,6 +30,17 @@ partition_EVM_inputs.pl --genome BS_postgapfiller.fa --gene_predictions rnd_1_2_
 write_EVM_commands.pl --genome BS_postgapfiller.fa --weights `pwd`/weights.txt --gene_predictions rnd_1_2_3_merged.gff --protein_alignments public.gff \
 --transcript_alignments annot.sqlite3.pasa_assemblies.gff3 --output_file_name evm.out  --partition partitions_list.out >  commands.list
 
+cat commands.list | parallel -j24
+
 recombine_EVM_partial_outputs.pl --partitions partitions_list.out --output_file_name evm.out
+
+convert_EVM_outputs_to_GFF3.pl  --partitions partitions_list.out --output evm.out  --genome BS_postgapfiller.fa
+
+find . -regex ".*evm.out.gff3" -exec cat {} \; > EVM.gff3
+
+gff3_file_fix_CDS_phases.pl EVM.gff3 genome.fasta.masked > fixed.EVM.gff3
+
+python2.7 genomeannotation-GAG-997e384/gag.py -f genome.fasta -g fixed.EVM.gff3
+
 
 
