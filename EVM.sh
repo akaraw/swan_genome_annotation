@@ -23,3 +23,13 @@ mamba install -c bioconda pasa
 
 /90days/uqakaraw/miniconda3/envs/evm/opt/evidencemodeler-1.1.1/EvmUtils/create_weights_file.pl -T \
 evm/pasa/annot.sqlite3.pasa_assemblies.gff3 -P public.gff -A rnd_1_2_3_merged.gff > weights.txt
+
+partition_EVM_inputs.pl --genome BS_postgapfiller.fa --gene_predictions rnd_1_2_3_merged.gff --transcript_alignments annot.sqlite3.pasa_assemblies.gff3 \
+--protein_alignments public.gff --segmentSize 1000000 --overlapSize 10000 --partition_listing partitions_list.out
+
+write_EVM_commands.pl --genome BS_postgapfiller.fa --weights `pwd`/weights.txt --gene_predictions rnd_1_2_3_merged.gff --protein_alignments public.gff \
+--transcript_alignments annot.sqlite3.pasa_assemblies.gff3 --output_file_name evm.out  --partition partitions_list.out >  commands.list
+
+recombine_EVM_partial_outputs.pl --partitions partitions_list.out --output_file_name evm.out
+
+
