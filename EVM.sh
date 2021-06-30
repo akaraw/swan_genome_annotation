@@ -26,7 +26,7 @@ create_weights_file.pl -T evm/pasa/annot.sqlite3.pasa_assemblies.gff3 -P public.
 partition_EVM_inputs.pl --genome BS_postgapfiller.fa --gene_predictions rnd_1_2_3_merged.gff --transcript_alignments annot.sqlite3.pasa_assemblies.gff3 \
 --protein_alignments public.gff --segmentSize 1000000 --overlapSize 10000 --partition_listing partitions_list.out
 
-write_EVM_commands.pl --genome BS_postgapfiller.fa --weights `pwd`/weights.txt --gene_predictions rnd_1_2_3_merged.gff --protein_alignments public.gff \
+write_EVM_commands.pl --genome BS_postgapfiller.fa --weights `pwd`/weights.txt --gene_predictions rnd_1_2_3_merged.gff --protein_alignments pubgemo.gff \
 --transcript_alignments annot.sqlite3.pasa_assemblies.gff3 --output_file_name evm.out  --partition partitions_list.out >  commands.list
 
 cat commands.list | parallel -j24
