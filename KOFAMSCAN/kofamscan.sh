@@ -1,6 +1,9 @@
 #kofamscan run:
 
 mamba create -n kofam -c bioconda kofamscan
+
+conda activate kofam
+
 wget ftp://ftp.genome.jp/pub/db/kofam/ko_list.gz
 wget ftp://ftp.genome.jp/pub/db/kofam/profiles.tar.gz
 
