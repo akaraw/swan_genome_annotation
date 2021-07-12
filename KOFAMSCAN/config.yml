@@ -1,0 +1,18 @@
+# Path to your KO-HMM database
+# A database can be a .hmm file, a .hal file or a directory in which
+# .hmm files are. Omit the extension if it is .hal or .hmm file
+profile: ./profiles
+
+# Path to the KO list file
+ko_list: ko_list
+
+# Path to an executable file of hmmsearch
+# You do not have to set this if it is in your $PATH
+# hmmsearch: /usr/local/bin/hmmsearch
+
+# Path to an executable file of GNU parallel
+# You do not have to set this if it is in your $PATH
+# parallel: /usr/local/bin/parallel
+
+# Number of hmmsearch processes to be run parallelly
+cpu: 20
