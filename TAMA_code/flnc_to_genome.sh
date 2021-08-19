@@ -47,5 +47,6 @@ cat ${gen}_blastp{001..100} > ${gen}_blastp
 python2 tama/tama/tama_go/orf_nmd_predictions/tama_cds_regions_bed_add.py -p ${gen}_blastp -a final_${gen}.bed -f ${gen}_iso.fasta -o ${gen}_final.bed
 
 
-
+#Counting number of transcript models
+ grep "full_match\|90_match" ${gen}_final.bed | cut -f4 | cut -d";" -f2 | sort | uniq | wc -l
 
