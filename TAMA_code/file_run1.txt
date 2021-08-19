@@ -1,0 +1,11 @@
+ms_1_run1.bed   no_cap  1,1,1   ms11
+ms_2_run1.bed   no_cap  1,1,1   ms12
+ms_3_run1.bed   no_cap  1,1,1   ms13
+ms_4_run1.bed   no_cap  1,1,1   ms14
+ms_5_run1.bed   no_cap  1,1,1   ms15
+ms_6_run1.bed   no_cap  1,1,1   ms16
+ms_7_run1.bed   no_cap  1,1,1   ms17
+ms_8_run1.bed   no_cap  1,1,1   ms18
+ms_9_run1.bed   no_cap  1,1,1   ms19
+ms_10_run1.bed   no_cap  1,1,1   ms110
+
