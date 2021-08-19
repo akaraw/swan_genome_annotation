@@ -44,7 +44,7 @@ for i in {001..100}; do python2 tama/tama/tama_go/orf_nmd_predictions/tama_orf_b
 cat ${gen}_blastp{001..100} > ${gen}_blastp
 
 #Creating the final bed file
-python2 tama/tama/tama_go/orf_nmd_predictions/tama_cds_regions_bed_add.py -p ${orf} -a final_${gen}.bed -f ${gen}_iso.fasta -o ${gen}_final.bed
+python2 tama/tama/tama_go/orf_nmd_predictions/tama_cds_regions_bed_add.py -p ${gen}_iso.aa -a final_${gen}.bed -f ${gen}_iso.fasta -o ${gen}_final.bed
 
 
 
