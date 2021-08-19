@@ -40,7 +40,8 @@ export -f tama_blast
 
 #Run blastp in parallel
 find ${gen}_iso.20.aa.split/ -type f -name "*aa" | parallel -j 24 tama {}
-cat ${gen}_iso.20.part_*txt > ${gen}_iso.20.txt
+cat ${gen}_iso.20.part_001.aa.txt > ${gen}_iso.20.txt
+cat ${gen}_iso.20.part_{002..100}.aa.txt |tail -n +24 >> ${gen}_iso.20.txt
 
 #Parsing blastp results
 python2 tama/tama/tama_go/orf_nmd_predictions/tama_orf_blastp_parser.py -b ${gen}_iso.20.txt -o ${gen}_blastp -f ensembl
