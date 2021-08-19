@@ -1,1 +1,4 @@
+firstrun.bed   no_cap  1,1,1   msf1
+secondrun.bed   no_cap  1,1,1   msf2
+
 
