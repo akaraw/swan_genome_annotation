@@ -1,10 +1,17 @@
 #Dependecies TAMA, bedtools, samtools, python2, seqkit, blast+
+#Download the mallard proteome from Ensembl version 104 and make a blast database for blastp
+#makeblastdb 
+#makeblastdb -in Anas_platyrhynchos.fa -dbtype prot -parse_seqids
+
+#Declare your variables
+gen= #genome prefix example ms.fa in ms
+bam= #flnc bam file from ISOseq3 run with --retain poly-A tail
 
 #Convert flnc.bam file to fasta
 samtools fasta -@ 24 $bam > flnc.$gen.fa
 
 #Mapping flnc reads to genome
-minimap2 -ax splice -uf --secondary=no --splice-flank=no -t 24 -C5 -O6,24 -B4 ms.fa flnc.fa | samtools view -@ 12 -b - > flnc.aligned.$gen.bam
+minimap2 -ax splice -uf --secondary=no --splice-flank=no -t 24 -C5 -O6,24 -B4 ms.fa flnc.$gen.fa | samtools view -@ 12 -b - > flnc.aligned.$gen.bam
 
 #Sorting bam file 
 samtools sort -@ 10 -o flnc.sorted.bam flnc.aligned.$gen.bam
