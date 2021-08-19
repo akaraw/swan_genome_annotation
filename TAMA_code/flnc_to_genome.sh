@@ -40,15 +40,11 @@ export -f tama_blast
 
 #Run blastp in parallel
 find ${gen}_iso.20.aa.split/ -type f -name "*aa" | parallel -j 24 tama {}
-cat ${gen}_iso.20.part_001.aa.txt > ${gen}_iso.20.txt
-head -n 22 ${gen}_iso.20.txt > remove_lines
-sed'/^$/d' -i remove_lines
-cat ${gen}_iso.20.part_{002..100}.aa.txt |grep -vFF remove_lines >> ${gen}_iso.20.txt
-rm remove_lines
+for i in {001..100}; do python2 tama/tama/tama_go/orf_nmd_predictions/tama_orf_blastp_parser.py -b ${gen}_iso.20.part_${i}.aa.txt -o ${gen}_blastp${i} ; done
+cat ${gen}_blastp{001..100} > ${gen}_blastp
 
-#Parsing blastp results
-python2 tama/tama/tama_go/orf_nmd_predictions/tama_orf_blastp_parser.py -b ${gen}_iso.20.txt -o ${gen}_blastp -f ensembl
-
+#Creating the final bed file
+python2 tama/tama/tama_go/orf_nmd_predictions/tama_cds_regions_bed_add.py -p ${orf} -a final_${gen}.bed -f ${gen}_iso.fasta -o ${gen}_final.bed
 
 
 
