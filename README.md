@@ -1,9 +1,6 @@
 ##Swan Genome Annotation 
 
 This explains the use of Maker3 and GeMoMa annotation pipelines used for mute swan and black swan genome annotations using the transcriptome and other homology evidence
-## Trancriptome was built using mute swan periheral blood obtained from Sweden
-## Transcriptome was built using four black swan tissue/cell types obtained from QLD
-![image](https://user-images.githubusercontent.com/43054305/117142294-ddcfb500-adf2-11eb-901e-cc297d972c07.png)
 
 ## Repeats were annotated using described method in the paper: Ref: (in preperation)
 Full repeat annotation will be in the future publication
